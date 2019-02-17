@@ -1,1 +1,1 @@
-# odoo-API
+# modules developed for external Odoo API
