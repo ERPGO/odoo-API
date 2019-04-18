@@ -13,12 +13,12 @@ def postJsonHandlerGezWebsite( request ):
     content_type = request.headers['content-type']
     if content_type == 'application/json':
         request_json = request.get_json(silent=True)
-        if request_json and 'reservation' in request_json:
-            reservation = request_json['reservation']
+        if request_json and 'e-ticketnumber' in request_json:
+            reservation = request_json['e-ticketnumber']
             if not reservation:
-                raise ValueError("JSON is invalid, 'reservation' property is empty")
+                raise ValueError("JSON is invalid, 'e-ticketnumber' property is empty")
         else:
-            raise ValueError("JSON is invalid, or missing a 'reservation' property")
+            raise ValueError("JSON is invalid, or missing a 'e-ticketnumber' property")
     else:
         raise ValueError("Unknown content type: {}".format(content_type))
 
@@ -32,11 +32,16 @@ def postJsonHandlerGezWebsite( request ):
     print(request.is_json)
     content = request.get_json()
     customer = content['customer']
+    customer_type = content['customer_type']
     product_name = content['product_name']
     product_price = content['product_price']
     invoice_line_description = content['invoice_line_description']
-    reservation = content['reservation']
-    reservation_type = content['reservation_type']
+    reservation = content['e-ticketnumber']
+    reservation_type = content['product_name']
+    passenger = content['passenger']
+    agent = content['agent']
+    airlines = content['airlines']
+    # Predefined values
     GROUP = 'website'
     currency_id = 1
 
