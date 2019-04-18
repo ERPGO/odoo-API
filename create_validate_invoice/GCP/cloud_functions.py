@@ -15,6 +15,8 @@ def postJsonHandlerGezWebsite( request ):
         request_json = request.get_json(silent=True)
         if request_json and 'reservation' in request_json:
             reservation = request_json['reservation']
+            if not reservation:
+                raise ValueError("JSON is invalid, 'reservation' property is empty")
         else:
             raise ValueError("JSON is invalid, or missing a 'reservation' property")
     else:
